@@ -14,13 +14,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
   :root{
-    --bg:#000;
     --text:#faf6f2;
     --muted:#a89890;
     --rose:#f0a8b0;
-    --rose2:#d47884;
     --gold:#e8d0b0;
-    --gold2:#c9a87a;
     --font:'Outfit',system-ui,sans-serif;
     --display:'Cormorant Garamond',Georgia,serif;
   }
@@ -31,312 +28,196 @@
     -webkit-font-smoothing:antialiased;overflow-x:hidden;
   }
 
-  /* grid sutil de fundo */
-  .bg-grid{
-    position:fixed;inset:0;z-index:0;pointer-events:none;
-    background-image:
-      linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-    background-size:48px 48px;
-    mask-image:radial-gradient(ellipse 80% 70% at 50% 30%, #000 20%, transparent 75%);
-  }
-  .orb{
-    position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;
-  }
-  .orb1{width:420px;height:420px;top:-80px;left:50%;transform:translateX(-50%);
-    background:radial-gradient(circle,rgba(200,90,110,.2),transparent 70%);
-    animation:orb 9s ease-in-out infinite}
-  .orb2{width:280px;height:280px;bottom:8%;left:-40px;
-    background:radial-gradient(circle,rgba(180,140,80,.12),transparent 70%)}
-  .orb3{width:240px;height:240px;bottom:20%;right:-30px;
-    background:radial-gradient(circle,rgba(160,70,100,.1),transparent 70%)}
-  @keyframes orb{0%,100%{opacity:.85}50%{opacity:1;transform:translateX(-50%) scale(1.06)}}
-
   .page{
-    position:relative;z-index:2;
-    max-width:440px;margin:0 auto;
-    padding:0 0 56px;
+    max-width:430px;margin:0 auto;
+    min-height:100dvh;
+    display:flex;flex-direction:column;
+    padding:10px 0 28px;
   }
 
-  /* ===== TOP ===== */
   .top{
-    padding:18px 18px 0;
     display:flex;align-items:center;justify-content:space-between;
-    animation:up .55s cubic-bezier(.22,1,.36,1) both;
+    padding:4px 16px 8px;
   }
   .logo{
-    font-family:var(--display);font-size:17px;font-weight:600;letter-spacing:.03em;
+    font-family:var(--display);font-size:16px;font-weight:600;letter-spacing:.02em;
   }
-  .logo b{color:var(--gold);font-weight:600}
+  .logo em{font-style:normal;color:var(--gold)}
   .chip{
     display:inline-flex;align-items:center;gap:6px;
-    font-size:9px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;
-    color:#8fdfb8;padding:6px 11px;border-radius:999px;
-    background:rgba(79,212,168,.07);border:1px solid rgba(79,212,168,.2);
+    font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
+    color:#8fdfb8;padding:5px 10px;border-radius:999px;
+    background:rgba(79,212,168,.08);border:1px solid rgba(79,212,168,.22);
   }
-  .chip i{width:6px;height:6px;border-radius:50%;background:#4fd4a8;
-    box-shadow:0 0 8px #4fd4a8;animation:blink 1.6s ease infinite}
+  .chip i{
+    width:6px;height:6px;border-radius:50%;background:#4fd4a8;
+    box-shadow:0 0 8px #4fd4a8;animation:blink 1.6s ease infinite;
+  }
   @keyframes blink{50%{opacity:.3}}
 
-  /* ===== HEADLINE ===== */
-  .headline{
-    text-align:center;padding:22px 20px 8px;
-    animation:up .65s .05s cubic-bezier(.22,1,.36,1) both;
-  }
-  .headline .kicker{
-    font-size:10px;font-weight:700;letter-spacing:2.4px;text-transform:uppercase;
-    color:var(--gold);margin-bottom:10px;opacity:.9;
-  }
+  .headline{text-align:center;padding:4px 16px 10px}
   .headline h1{
     font-family:var(--display);
-    font-size:clamp(42px,12vw,54px);font-weight:600;
-    line-height:.95;letter-spacing:.01em;
+    font-size:clamp(30px,8.5vw,38px);font-weight:600;line-height:1;
   }
   .headline h1 span{
-    background:linear-gradient(115deg,var(--gold),var(--rose),var(--gold2));
+    background:linear-gradient(115deg,var(--gold),var(--rose),var(--gold));
     -webkit-background-clip:text;background-clip:text;color:transparent;
   }
-  .headline p{
-    margin-top:10px;font-size:13.5px;color:var(--muted);line-height:1.5;
-    max-width:280px;margin-left:auto;margin-right:auto;
-  }
+  .headline p{margin-top:6px;font-size:12px;color:var(--muted)}
 
-  /* ===== VIDEO — limpo, sem máscara ===== */
-  .stage{
+  /* CENA: vídeo + botão DENTRO do frame */
+  .scene{
     position:relative;
-    margin:6px auto 0;
-    max-width:400px;
-    animation:up .7s .1s cubic-bezier(.22,1,.36,1) both;
+    width:100%;
+    flex:1;
+    min-height:62vh;
+    display:flex;align-items:flex-end;justify-content:center;
   }
-  .stage video{
-    display:block;width:100%;
-    aspect-ratio:9/11;
+  .scene video{
+    position:absolute;inset:0;
+    width:100%;height:100%;
     object-fit:cover;
-    object-position:center 8%;
+    object-position:center 10%;
     background:#000;
   }
-  /* só um fade bem leve embaixo p/ fundir no botão — sem escurecer o rosto */
-  .stage-bottom{
-    position:absolute;left:0;right:0;bottom:0;height:18%;
-    background:linear-gradient(to top, #000 0%, transparent 100%);
+  /* só um véu bem baixo para o botão ler melhor — sem escurecer o rosto */
+  .scene-veil{
+    position:absolute;left:0;right:0;bottom:0;height:32%;
+    background:linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.25) 55%, transparent 100%);
     pointer-events:none;
   }
 
-  /* conector visual */
-  .connector{
-    display:flex;flex-direction:column;align-items:center;
-    margin-top:-6px;margin-bottom:4px;
-    animation:up .7s .18s cubic-bezier(.22,1,.36,1) both;
-  }
-  .connector .line{
-    width:1.5px;height:28px;
-    background:linear-gradient(to bottom, rgba(240,168,176,.7), rgba(240,168,176,.15));
-  }
-  .connector .node{
-    width:9px;height:9px;border-radius:50%;
-    background:var(--rose);
-    box-shadow:0 0 0 4px rgba(240,168,176,.15), 0 0 18px var(--rose);
-    animation:node 1.8s ease-in-out infinite;
-  }
-  @keyframes node{
-    0%,100%{box-shadow:0 0 0 4px rgba(240,168,176,.12),0 0 14px var(--rose)}
-    50%{box-shadow:0 0 0 7px rgba(240,168,176,.2),0 0 24px var(--rose)}
-  }
-  .connector .hint{
-    margin-top:8px;
-    font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-    color:var(--rose);
-  }
-
-  /* ===== PARTNER CARD — destaque ===== */
-  .partner-wrap{
-    padding:0 16px;
-    animation:up .75s .22s cubic-bezier(.22,1,.36,1) both;
+  .in-video{
+    position:relative;z-index:3;
+    width:calc(100% - 28px);
+    max-width:390px;
+    margin:0 auto 22px;
   }
   .partner{
-    display:flex;align-items:center;gap:14px;
-    padding:18px 16px 18px 18px;
-    border-radius:22px;
+    display:flex;align-items:center;gap:12px;
+    padding:14px 14px 14px 16px;
+    border-radius:20px;
     text-decoration:none;color:var(--text);
     position:relative;overflow:hidden;
-    background:
-      linear-gradient(145deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,.03) 100%);
-    border:1px solid rgba(240,168,176,.4);
+    background:rgba(18,14,16,.72);
+    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    border:1px solid rgba(240,168,176,.45);
     box-shadow:
-      0 0 0 1px rgba(255,255,255,.05) inset,
-      0 24px 48px rgba(0,0,0,.55),
-      0 0 48px rgba(240,168,176,.15);
-    transition:transform .22s cubic-bezier(.22,1,.36,1), box-shadow .22s, border-color .22s;
+      0 0 0 1px rgba(255,255,255,.06) inset,
+      0 16px 40px rgba(0,0,0,.45),
+      0 0 36px rgba(240,168,176,.18);
+    transition:transform .2s,box-shadow .2s,border-color .2s;
   }
   .partner:hover{
-    transform:translateY(-3px) scale(1.012);
-    border-color:rgba(240,168,176,.6);
+    transform:translateY(-2px) scale(1.015);
+    border-color:rgba(240,168,176,.7);
     box-shadow:
-      0 0 0 1px rgba(255,255,255,.07) inset,
-      0 28px 56px rgba(0,0,0,.6),
-      0 0 64px rgba(240,168,176,.28);
+      0 0 0 1px rgba(255,255,255,.08) inset,
+      0 20px 48px rgba(0,0,0,.5),
+      0 0 48px rgba(240,168,176,.28);
   }
   .partner:active{transform:scale(.985)}
   .partner::before{
     content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
     background:linear-gradient(180deg,var(--rose),var(--gold));
   }
-  .partner::after{
-    content:'';position:absolute;top:0;left:-50%;width:35%;height:100%;
-    background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);
-    transform:skewX(-18deg);animation:sweep 3.8s ease-in-out infinite;
-  }
-  @keyframes sweep{0%,100%{left:-50%}45%,55%{left:130%}}
-
   .p-ico{
-    width:54px;height:54px;flex-shrink:0;border-radius:16px;
-    display:grid;place-items:center;font-size:26px;
-    background:linear-gradient(145deg,rgba(240,168,176,.3),rgba(228,201,165,.12));
+    width:46px;height:46px;flex-shrink:0;border-radius:14px;
+    display:grid;place-items:center;font-size:22px;
+    background:linear-gradient(145deg,rgba(240,168,176,.32),rgba(228,201,165,.12));
     border:1px solid rgba(240,168,176,.4);
-    box-shadow:0 8px 20px rgba(0,0,0,.25);
   }
   .p-body{flex:1;min-width:0}
   .p-body strong{
-    display:block;font-size:16px;font-weight:700;letter-spacing:-.02em;margin-bottom:3px;
+    display:block;font-size:15px;font-weight:700;letter-spacing:-.02em;margin-bottom:2px;
   }
-  .p-body span{font-size:12px;color:var(--muted);line-height:1.35}
+  .p-body span{font-size:11.5px;color:#c4b6af}
   .p-tag{
     display:inline-block;margin-left:6px;vertical-align:middle;
-    font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;
-    padding:3px 9px;border-radius:999px;
+    font-size:8.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;
+    padding:2px 7px;border-radius:999px;
     background:rgba(240,168,176,.2);color:var(--rose);
     border:1px solid rgba(240,168,176,.35);
   }
   .p-go{
-    width:36px;height:36px;border-radius:50%;flex-shrink:0;
+    width:32px;height:32px;border-radius:50%;flex-shrink:0;
     display:grid;place-items:center;
-    background:rgba(240,168,176,.14);color:var(--rose);
-    border:1px solid rgba(240,168,176,.25);
-    transition:transform .2s;
+    background:rgba(240,168,176,.16);color:var(--rose);
   }
-  .partner:hover .p-go{transform:translateX(4px)}
-  .p-go svg{width:15px;height:15px}
+  .p-go svg{width:14px;height:14px}
 
-  /* ===== STATS / extras (riqueza visual) ===== */
-  .stats{
-    display:grid;grid-template-columns:1fr 1fr 1fr;
-    gap:10px;padding:22px 16px 0;
-    animation:up .75s .3s cubic-bezier(.22,1,.36,1) both;
+  .below{
+    padding:18px 16px 0;
+    text-align:center;
   }
-  .stat{
-    text-align:center;padding:14px 8px;border-radius:16px;
-    background:rgba(255,255,255,.035);
-    border:1px solid rgba(255,255,255,.07);
-  }
-  .stat b{
-    display:block;font-family:var(--display);font-size:22px;font-weight:600;
-    color:var(--gold);line-height:1.1;margin-bottom:4px;
-  }
-  .stat span{font-size:10px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
-
-  /* ===== SOCIAIS ===== */
-  .socials-block{
-    margin-top:28px;text-align:center;padding:0 16px;
-    animation:up .75s .36s cubic-bezier(.22,1,.36,1) both;
-  }
-  .socials-block .lbl{
+  .lbl{
     font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-    color:var(--muted);margin-bottom:14px;
+    color:var(--muted);margin-bottom:12px;
   }
-  .socials{display:flex;justify-content:center;gap:12px}
+  .socials{display:flex;justify-content:center;gap:10px}
   .social{
-    display:flex;align-items:center;gap:10px;
-    padding:12px 18px;border-radius:16px;
+    display:flex;align-items:center;gap:8px;
+    padding:11px 16px;border-radius:14px;
     background:rgba(255,255,255,.04);
     border:1px solid rgba(255,255,255,.1);
     color:var(--text);text-decoration:none;
     font-size:12px;font-weight:600;
-    transition:transform .2s,background .2s,border-color .2s,color .2s,box-shadow .2s;
+    transition:transform .2s,background .2s,border-color .2s,color .2s;
   }
-  .social:hover{
-    transform:translateY(-3px);
-    background:rgba(255,255,255,.08);
-    box-shadow:0 14px 32px rgba(0,0,0,.4);
-  }
-  .social svg{width:20px;height:20px;flex-shrink:0}
+  .social:hover{transform:translateY(-2px);background:rgba(255,255,255,.08)}
+  .social svg{width:18px;height:18px}
   .social.ig:hover{color:#e1306c;border-color:rgba(225,48,108,.4)}
   .social.yt:hover{color:#ff4444;border-color:rgba(255,68,68,.4)}
 
-  /* ===== FOOTER ===== */
   footer{
-    text-align:center;margin-top:36px;padding:24px 16px 0;
-    border-top:1px solid rgba(255,255,255,.06);
-    animation:up .75s .42s cubic-bezier(.22,1,.36,1) both;
+    text-align:center;padding:18px 16px 0;
+    font-size:11px;color:var(--muted);
   }
-  footer .brand{font-family:var(--display);font-size:16px;font-weight:600;color:var(--gold);margin-bottom:4px}
-  footer p{font-size:11px;color:var(--muted)}
-
-  @keyframes up{
-    from{opacity:0;transform:translateY(16px)}
-    to{opacity:1;transform:none}
-  }
+  footer b{font-family:var(--display);font-weight:600;color:var(--gold)}
 </style>
 </head>
 <body>
-  <div class="bg-grid"></div>
-  <div class="orb orb1"></div>
-  <div class="orb orb2"></div>
-  <div class="orb orb3"></div>
-
   <div class="page">
 
     <div class="top">
-      <div class="logo">Biah <b>Ferreira</b></div>
+      <div class="logo">Biah <em>Ferreira</em></div>
       <div class="chip"><i></i> Oficial</div>
     </div>
 
     <header class="headline">
-      <p class="kicker">Link in bio</p>
       <h1>Biah <span>Ferreira</span></h1>
-      <p>Influencer · conteúdo, lifestyle e parcerias escolhidas a dedo.</p>
+      <p>Influencer · parcerias selecionadas</p>
     </header>
 
-    <!-- Vídeo limpo: fundo preto do próprio vídeo, sem máscara -->
-    <div class="stage">
+    <section class="scene" aria-label="Apresentação">
       <video id="v" autoplay muted loop playsinline poster="foto.jpg">
         <source src="biah-intro-web.mp4" type="video/mp4"/>
       </video>
-      <div class="stage-bottom"></div>
-    </div>
+      <div class="scene-veil"></div>
 
-    <div class="connector">
-      <div class="line"></div>
-      <div class="node"></div>
-      <p class="hint">Ela indica</p>
-    </div>
+      <div class="in-video">
+        <a class="partner" href="https://www.ybera.com?parceiro=92819" target="_blank" rel="noopener noreferrer">
+          <div class="p-ico">✨</div>
+          <div class="p-body">
+            <strong>Ybera Beauty <span class="p-tag">Parceira</span></strong>
+            <span>Cosméticos &amp; cuidados — link exclusivo</span>
+          </div>
+          <div class="p-go">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </div>
+        </a>
+      </div>
+    </section>
 
-    <div class="partner-wrap">
-      <a class="partner" href="https://www.ybera.com?parceiro=92819" target="_blank" rel="noopener noreferrer">
-        <div class="p-ico">✨</div>
-        <div class="p-body">
-          <strong>Ybera Beauty <span class="p-tag">Parceira</span></strong>
-          <span>Cosméticos &amp; cuidados — link exclusivo</span>
-        </div>
-        <div class="p-go">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </div>
-      </a>
-    </div>
-
-    <div class="stats">
-      <div class="stat"><b>01</b><span>Parceira</span></div>
-      <div class="stat"><b>IG</b><span>Principal</span></div>
-      <div class="stat"><b>YT</b><span>Canal</span></div>
-    </div>
-
-    <div class="socials-block">
+    <div class="below">
       <p class="lbl">Me acompanhe</p>
       <div class="socials">
-        <a class="social ig" href="https://www.instagram.com/biah.ferreira__" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <a class="social ig" href="https://www.instagram.com/biah.ferreira__" target="_blank" rel="noopener noreferrer">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
           Instagram
         </a>
-        <a class="social yt" href="https://www.youtube.com/@biah.ferreira" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <a class="social yt" href="https://www.youtube.com/@biah.ferreira" target="_blank" rel="noopener noreferrer">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
           YouTube
         </a>
@@ -344,8 +225,7 @@
     </div>
 
     <footer>
-      <p class="brand">Biah Ferreira</p>
-      <p>Parcerias oficiais · © <span id="y"></span></p>
+      <b>Biah Ferreira</b> · Parcerias oficiais · © <span id="y"></span>
     </footer>
   </div>
 
