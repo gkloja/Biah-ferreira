@@ -30,18 +30,14 @@
 
   .page{
     max-width:430px;margin:0 auto;
-    min-height:100dvh;
-    display:flex;flex-direction:column;
-    padding:10px 0 28px;
+    padding:12px 0 32px;
   }
 
   .top{
     display:flex;align-items:center;justify-content:space-between;
-    padding:4px 16px 8px;
+    padding:0 16px 8px;
   }
-  .logo{
-    font-family:var(--display);font-size:16px;font-weight:600;letter-spacing:.02em;
-  }
+  .logo{font-family:var(--display);font-size:16px;font-weight:600}
   .logo em{font-style:normal;color:var(--gold)}
   .chip{
     display:inline-flex;align-items:center;gap:6px;
@@ -55,102 +51,79 @@
   }
   @keyframes blink{50%{opacity:.3}}
 
-  .headline{text-align:center;padding:4px 16px 10px}
+  .headline{text-align:center;padding:2px 16px 6px}
   .headline h1{
     font-family:var(--display);
-    font-size:clamp(30px,8.5vw,38px);font-weight:600;line-height:1;
+    font-size:clamp(28px,8vw,36px);font-weight:600;line-height:1;
   }
   .headline h1 span{
     background:linear-gradient(115deg,var(--gold),var(--rose),var(--gold));
     -webkit-background-clip:text;background-clip:text;color:transparent;
   }
-  .headline p{margin-top:6px;font-size:12px;color:var(--muted)}
+  .headline p{margin-top:5px;font-size:12px;color:var(--muted)}
 
-  /* CENA: vídeo + botão DENTRO do frame */
+  /* Vídeo recortado + botão na altura dos dedos */
   .scene{
     position:relative;
     width:100%;
-    flex:1;
-    min-height:62vh;
-    display:flex;align-items:flex-end;justify-content:center;
+    /* crop 1064x1200 */
+    aspect-ratio:1064 / 1200;
+    background:#000;
+    overflow:hidden;
   }
   .scene video{
     position:absolute;inset:0;
     width:100%;height:100%;
     object-fit:cover;
-    object-position:center 10%;
+    object-position:center top;
     background:#000;
-  }
-  /* só um véu bem baixo para o botão ler melhor — sem escurecer o rosto */
-  .scene-veil{
-    position:absolute;left:0;right:0;bottom:0;height:32%;
-    background:linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.25) 55%, transparent 100%);
-    pointer-events:none;
   }
 
   .in-video{
-    position:relative;z-index:3;
-    width:calc(100% - 28px);
-    max-width:390px;
-    margin:0 auto 22px;
+    position:absolute;
+    left:14px;right:14px;
+    /* dedos apontam ~58–64% da altura do crop */
+    top:62%;
+    z-index:3;
   }
   .partner{
     display:flex;align-items:center;gap:12px;
-    padding:14px 14px 14px 16px;
-    border-radius:20px;
+    padding:13px 13px 13px 15px;
+    border-radius:18px;
     text-decoration:none;color:var(--text);
-    position:relative;overflow:hidden;
-    background:rgba(18,14,16,.72);
-    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-    border:1px solid rgba(240,168,176,.45);
+    background:rgba(12,10,12,.78);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border:1px solid rgba(240,168,176,.48);
     box-shadow:
-      0 0 0 1px rgba(255,255,255,.06) inset,
-      0 16px 40px rgba(0,0,0,.45),
-      0 0 36px rgba(240,168,176,.18);
-    transition:transform .2s,box-shadow .2s,border-color .2s;
-  }
-  .partner:hover{
-    transform:translateY(-2px) scale(1.015);
-    border-color:rgba(240,168,176,.7);
-    box-shadow:
-      0 0 0 1px rgba(255,255,255,.08) inset,
-      0 20px 48px rgba(0,0,0,.5),
-      0 0 48px rgba(240,168,176,.28);
+      0 0 0 1px rgba(255,255,255,.05) inset,
+      0 14px 36px rgba(0,0,0,.45),
+      0 0 28px rgba(240,168,176,.16);
   }
   .partner:active{transform:scale(.985)}
-  .partner::before{
-    content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
-    background:linear-gradient(180deg,var(--rose),var(--gold));
-  }
   .p-ico{
-    width:46px;height:46px;flex-shrink:0;border-radius:14px;
-    display:grid;place-items:center;font-size:22px;
+    width:44px;height:44px;flex-shrink:0;border-radius:13px;
+    display:grid;place-items:center;font-size:20px;
     background:linear-gradient(145deg,rgba(240,168,176,.32),rgba(228,201,165,.12));
     border:1px solid rgba(240,168,176,.4);
   }
   .p-body{flex:1;min-width:0}
-  .p-body strong{
-    display:block;font-size:15px;font-weight:700;letter-spacing:-.02em;margin-bottom:2px;
-  }
-  .p-body span{font-size:11.5px;color:#c4b6af}
+  .p-body strong{display:block;font-size:14.5px;font-weight:700;margin-bottom:2px}
+  .p-body span{font-size:11px;color:#c4b6af}
   .p-tag{
     display:inline-block;margin-left:6px;vertical-align:middle;
-    font-size:8.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;
+    font-size:8px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;
     padding:2px 7px;border-radius:999px;
     background:rgba(240,168,176,.2);color:var(--rose);
     border:1px solid rgba(240,168,176,.35);
   }
   .p-go{
-    width:32px;height:32px;border-radius:50%;flex-shrink:0;
+    width:30px;height:30px;border-radius:50%;flex-shrink:0;
     display:grid;place-items:center;
     background:rgba(240,168,176,.16);color:var(--rose);
   }
-  .p-go svg{width:14px;height:14px}
+  .p-go svg{width:13px;height:13px}
 
-  .below{
-    padding:18px 16px 0;
-    text-align:center;
-  }
+  .below{padding:18px 16px 0;text-align:center}
   .lbl{
     font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
     color:var(--muted);margin-bottom:12px;
@@ -163,15 +136,13 @@
     border:1px solid rgba(255,255,255,.1);
     color:var(--text);text-decoration:none;
     font-size:12px;font-weight:600;
-    transition:transform .2s,background .2s,border-color .2s,color .2s;
   }
-  .social:hover{transform:translateY(-2px);background:rgba(255,255,255,.08)}
   .social svg{width:18px;height:18px}
   .social.ig:hover{color:#e1306c;border-color:rgba(225,48,108,.4)}
   .social.yt:hover{color:#ff4444;border-color:rgba(255,68,68,.4)}
 
   footer{
-    text-align:center;padding:18px 16px 0;
+    text-align:center;padding:16px 16px 0;
     font-size:11px;color:var(--muted);
   }
   footer b{font-family:var(--display);font-weight:600;color:var(--gold)}
@@ -179,7 +150,6 @@
 </head>
 <body>
   <div class="page">
-
     <div class="top">
       <div class="logo">Biah <em>Ferreira</em></div>
       <div class="chip"><i></i> Oficial</div>
@@ -190,12 +160,10 @@
       <p>Influencer · parcerias selecionadas</p>
     </header>
 
-    <section class="scene" aria-label="Apresentação">
+    <section class="scene">
       <video id="v" autoplay muted loop playsinline poster="foto.jpg">
         <source src="biah-intro-web.mp4" type="video/mp4"/>
       </video>
-      <div class="scene-veil"></div>
-
       <div class="in-video">
         <a class="partner" href="https://www.ybera.com?parceiro=92819" target="_blank" rel="noopener noreferrer">
           <div class="p-ico">✨</div>
@@ -228,15 +196,10 @@
       <b>Biah Ferreira</b> · Parcerias oficiais · © <span id="y"></span>
     </footer>
   </div>
-
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
     var v = document.getElementById('v');
-    if (v) {
-      v.muted = true;
-      var p = v.play();
-      if (p && p.catch) p.catch(function(){});
-    }
+    if (v) { v.muted = true; var p = v.play(); if (p && p.catch) p.catch(function(){}); }
   </script>
 </body>
 </html>
